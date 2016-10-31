@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../../../media/vendor/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../media/coderoom-helpers/coderoom.css">
+    <link rel="stylesheet" href="../../../tpls/5/1/files/datepicker.css">
+</head>
+<body>
+
+
+<div class="cr-wrap" ng-app="ui.bootstrap.demo">
+    <div class="cr-content" ng-controller="DatepickerDemoCtrl">
+        <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+
+        <h4>Inline</h4>
+        <div style="display:inline-block; min-height:290px;">
+            <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
+        </div>
+
+        <hr />
+
+        <button type="button" class="btn btn-sm btn-info" ng-click="today()">
+            Today
+        </button>
+
+        <button type="button" class="btn btn-sm btn-default" ng-click="setDate(2009, 7, 24)">
+            2009-08-24
+        </button>
+
+        <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">
+            Clear
+        </button>
+
+        <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" uib-tooltip="After today restriction">
+            Min date
+        </button>
+    </div>
+</div>
+
+
+<script src="../../../media/vendor/angular-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/angular-animate-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/angular-sanitize-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/ui-bootstrap-tpls-2.2.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../tpls/5/1/files/datepicker.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

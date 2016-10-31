@@ -1,0 +1,14 @@
+#IDE
+.idea
+
+# Logs and coverage
+logs
+*.log
+npm-debug.log*
+coverage
+
+# Dependency directories
+node_modules
+
+# Optional npm cache directory
+.npm

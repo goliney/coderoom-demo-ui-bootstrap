@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../../../media/vendor/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../media/coderoom-helpers/coderoom.css">
+</head>
+<body>
+
+
+<div class="cr-wrap" ng-app="ui.bootstrap.demo">
+    <div class="cr-content" ng-controller="PagerDemoCtrl">
+        <h4>Pager</h4>
+        <pre>You are currently on page {{currentPage}}</pre>
+        <ul uib-pager total-items="totalItems" ng-model="currentPage"></ul>
+    </div>
+</div>
+
+
+<script src="../../../media/vendor/angular-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/angular-animate-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/angular-sanitize-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/ui-bootstrap-tpls-2.2.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../tpls/8/0/files/pager.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

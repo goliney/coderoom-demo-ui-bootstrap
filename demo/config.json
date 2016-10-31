@@ -1,0 +1,15 @@
+{
+  "title": "UI Bootstrap v2.2.0",
+  "assets": [
+    "./project/vendor/bootstrap-3.3.7/**/*"
+  ],
+  "media": [
+    "./project/vendor/angular-1*.js",
+    "./project/vendor/angular-animate-*.js",
+    "./project/vendor/angular-sanitize-*.js",
+    "./project/vendor/bootstrap-3.3.7/css/bootstrap.css",
+    "./project/vendor/ui-bootstrap-tpls-*.js",
+
+    "./project/coderoom-helpers/coderoom.css"
+  ]
+}

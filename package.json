@@ -1,0 +1,31 @@
+{
+  "name": "coderoom-demo-ui-bootstrap",
+  "version": "1.0.0",
+  "description": "Demo for Coderoom with UI-Bootstrap directives",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "coderoom demo/ build/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goliney/coderoom-demo-ui-bootstrap.git"
+  },
+  "keywords": [
+    "coderoom",
+    "demo",
+    "ui-bootstrap",
+    "angularjs",
+    "storybook"
+  ],
+  "author": "Sergey Goliney <sergey@goliney.com> (http://goliney.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goliney/coderoom-demo-ui-bootstrap/issues"
+  },
+  "homepage": "https://github.com/goliney/coderoom-demo-ui-bootstrap#readme",
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-coderoom": "^0.1.1",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}

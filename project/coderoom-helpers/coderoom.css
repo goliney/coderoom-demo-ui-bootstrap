@@ -1,0 +1,17 @@
+html,
+body {
+    height: 100%;
+}
+* {
+    box-sizing: border-box;
+}
+.cr-wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.cr-content {
+    flex: 1;
+    width: 100%;
+    padding: 40px;
+}

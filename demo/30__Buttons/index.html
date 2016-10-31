@@ -1,0 +1,38 @@
+<div class="cr-wrap" ng-app="ui.bootstrap.demo">
+    <div class="cr-content" ng-controller="ButtonsCtrl">
+        <h4>Single toggle</h4>
+        <pre>{{singleModel}}</pre>
+        <button type="button" class="btn btn-primary" ng-model="singleModel" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+            Single Toggle
+        </button>
+
+        <h4>Checkbox</h4>
+        <pre>Model: {{checkModel}}</pre>
+        <pre>Results: {{checkResults}}</pre>
+        <p class="btn-group">
+            <label class="btn btn-primary" ng-model="checkModel.left" uib-btn-checkbox>Left</label>
+            <label class="btn btn-primary" ng-model="checkModel.middle" uib-btn-checkbox>Middle</label>
+            <label class="btn btn-primary" ng-model="checkModel.right" uib-btn-checkbox>Right</label>
+        </p>
+
+        <h4>Radio &amp; Uncheckable Radio</h4>
+        <pre>{{radioModel || 'null'}}</pre>
+        <p class="btn-group">
+            <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Left'">Left</label>
+            <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Middle'">Middle</label>
+            <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Right'">Right</label>
+        </p>
+
+        <p class="btn-group">
+            <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Left'" uncheckable>Left</label>
+            <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Middle'" uncheckable>Middle</label>
+            <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Right'" uib-uncheckable="uncheckable">Right</label>
+        </p>
+
+        <p>
+            <button class="btn btn-default" ng-click="uncheckable = !uncheckable">
+                Toggle uncheckable
+            </button>
+        </p>
+    </div>
+</div>
