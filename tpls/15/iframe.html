@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../../media/vendor/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../../media/coderoom-helpers/coderoom.css">
+    <link rel="stylesheet" href="../../tpls/15/files/typeahead.css">
+</head>
+<body>
+
+
+<div class="cr-wrap" ng-app="ui.bootstrap.demo">
+    <div class="cr-content container-fluid typeahead-demo" ng-controller="TypeaheadCtrl">
+        <script type="text/ng-template" id="customTemplate.html">
+            <a>
+                <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+                <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+            </a>
+        </script>
+
+        <script type="text/ng-template" id="customPopupTemplate.html">
+            <div class="custom-popup-wrapper"
+                 ng-style="{top: position().top+'px', left: position().left+'px'}"
+                 style="display: block;"
+                 ng-show="isOpen() && !moveInProgress"
+                 aria-hidden="{{!isOpen()}}">
+                <p class="message">select location from drop down.</p>
+
+                <ul class="dropdown-menu" role="listbox">
+                    <li class="uib-typeahead-match"
+                        ng-repeat="match in matches track by $index"
+                        ng-class="{active: isActive($index) }"
+                        ng-mouseenter="selectActive($index)"
+                        ng-click="selectMatch($index)"
+                        role="option"
+                        id="{{::match.id}}">
+                        <div uib-typeahead-match
+                             index="$index"
+                             match="match" query="query"
+                             template-url="templateUrl">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </script>
+
+        <h4>Static arrays</h4>
+        <pre>Model: {{selected | json}}</pre>
+        <input type="text"
+               ng-model="selected"
+               uib-typeahead="state for state in states | filter:$viewValue | limitTo:8"
+               class="form-control">
+
+        <h4>Asynchronous results</h4>
+        <pre>Model: {{asyncSelected | json}}</pre>
+        <input type="text"
+               ng-model="asyncSelected"
+               placeholder="Locations loaded via $http"
+               uib-typeahead="address for address in getLocation($viewValue)"
+               typeahead-loading="loadingLocations"
+               typeahead-no-results="noResults"
+               class="form-control">
+        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+        <div ng-show="noResults">
+            <i class="glyphicon glyphicon-remove"></i> No Results Found
+        </div>
+
+        <h4>ngModelOptions support</h4>
+        <pre>Model: {{ngModelOptionsSelected | json}}</pre>
+        <input type="text"
+               ng-model="ngModelOptionsSelected"
+               ng-model-options="modelOptions"
+               uib-typeahead="state for state in states | filter:$viewValue | limitTo:8"
+               class="form-control">
+
+        <h4>Custom templates for results</h4>
+        <pre>Model: {{customSelected | json}}</pre>
+        <input type="text"
+               ng-model="customSelected"
+               placeholder="Custom template"
+               uib-typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}"
+               typeahead-template-url="customTemplate.html"
+               class="form-control"
+               typeahead-show-hint="true"
+               typeahead-min-length="0">
+
+        <h4>Custom popup templates for typeahead's dropdown</h4>
+        <pre>Model: {{customPopupSelected | json}}</pre>
+        <input type="text"
+               ng-model="customPopupSelected"
+               placeholder="Custom popup template"
+               uib-typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}"
+               typeahead-popup-template-url="customPopupTemplate.html"
+               class="form-control">
+    </div>
+</div>
+
+
+<script src="../../media/vendor/angular-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../media/vendor/angular-animate-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../media/vendor/angular-sanitize-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../media/vendor/ui-bootstrap-tpls-2.2.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../tpls/15/files/typeahead.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

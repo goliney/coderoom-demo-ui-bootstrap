@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../../../media/vendor/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../media/coderoom-helpers/coderoom.css">
+</head>
+<body>
+
+
+<div class="cr-wrap" ng-app="ui.bootstrap.demo">
+    <div class="cr-content" ng-controller="TimepickerDemoCtrl">
+
+        <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+
+        <pre class="alert alert-info">Time is: {{mytime | date:'shortTime' }}</pre>
+
+        <div class="row">
+            <div class="col-xs-6">
+                Hours step is:
+                <select class="form-control" ng-model="hstep" ng-options="opt for opt in options.hstep"></select>
+            </div>
+            <div class="col-xs-6">
+                Minutes step is:
+                <select class="form-control" ng-model="mstep" ng-options="opt for opt in options.mstep"></select>
+            </div>
+        </div>
+
+        <hr>
+
+        <button type="button" class="btn btn-info" ng-click="toggleMode()">12H / 24H</button>
+        <button type="button" class="btn btn-default" ng-click="update()">Set to 14:00</button>
+        <button type="button" class="btn btn-danger" ng-click="clear()">Clear</button>
+    </div>
+</div>
+
+
+<script src="../../../media/vendor/angular-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/angular-animate-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/angular-sanitize-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/ui-bootstrap-tpls-2.2.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../tpls/5/3/files/timepicker.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

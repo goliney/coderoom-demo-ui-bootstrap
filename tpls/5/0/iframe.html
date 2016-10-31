@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../../../media/vendor/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../media/coderoom-helpers/coderoom.css">
+</head>
+<body>
+
+
+<div class="cr-wrap" ng-app="ui.bootstrap.demo">
+    <div class="cr-content" ng-controller="DateParserDemoCtrl">
+        <h4>Formatting codes playground</h4>
+        <p class="form-group">
+            <label>Define your format</label>
+            <input type="text" ng-model="format" class="form-control">
+        </p>
+        <p class="form-group">
+            <label>Result</label>
+            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="date"/>
+        </p>
+    </div>
+</div>
+
+
+<script src="../../../media/vendor/angular-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/angular-animate-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/angular-sanitize-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/ui-bootstrap-tpls-2.2.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../tpls/5/0/files/dateparser.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

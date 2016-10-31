@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../../media/vendor/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../../media/coderoom-helpers/coderoom.css">
+</head>
+<body>
+
+
+<div class="cr-wrap" ng-app="ui.bootstrap.demo">
+    <div class="cr-content" ng-controller="ProgressDemoCtrl">
+
+        <h3>Static</h3>
+        <div class="row">
+            <div class="col-sm-4"><uib-progressbar value="55"></uib-progressbar></div>
+            <div class="col-sm-4"><uib-progressbar class="progress-striped" value="22" type="warning">22%</uib-progressbar></div>
+            <div class="col-sm-4"><uib-progressbar class="progress-striped active" max="200" value="166" type="danger"><i>166 / 200</i></uib-progressbar></div>
+        </div>
+
+        <hr />
+        <h3>Dynamic <button type="button" class="btn btn-sm btn-primary" ng-click="random()">Randomize</button></h3>
+        <uib-progressbar max="max" value="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span></uib-progressbar>
+
+        <small><em>No animation</em></small>
+        <uib-progressbar animate="false" value="dynamic" type="success"><b>{{dynamic}}%</b></uib-progressbar>
+
+        <small><em>Object (changes type based on value)</em></small>
+        <uib-progressbar class="progress-striped active" value="dynamic" type="{{type}}">{{type}} <i ng-show="showWarning">!!! Watch out !!!</i></uib-progressbar>
+
+        <hr />
+        <h3>Stacked <button type="button" class="btn btn-sm btn-primary" ng-click="randomStacked()">Randomize</button></h3>
+        <uib-progress><uib-bar ng-repeat="bar in stacked track by $index" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></uib-bar></uib-progress>
+
+    </div>
+</div>
+
+
+<script src="../../media/vendor/angular-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../media/vendor/angular-animate-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../media/vendor/angular-sanitize-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../media/vendor/ui-bootstrap-tpls-2.2.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../tpls/11/files/progressbar.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

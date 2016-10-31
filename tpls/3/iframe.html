@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../../media/vendor/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../../media/coderoom-helpers/coderoom.css">
+    <link rel="stylesheet" href="../../tpls/3/files/carousel.css">
+</head>
+<body>
+
+
+<div class="cr-wrap" ng-app="ui.bootstrap.demo">
+    <div class="cr-content" ng-controller="CarouselDemoCtrl">
+        <div class="carousel-holder">
+            <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                    <img ng-src="{{slide.image}}" style="margin:auto;">
+                    <div class="carousel-caption">
+                        <h4>Slide {{slide.id}}</h4>
+                        <p>{{slide.text}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
+                <button type="button" class="btn btn-info" ng-click="randomize()">Randomize slides</button>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="noWrapSlides">
+                        Disable Slide Looping
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
+                <br/>Enter a negative number or 0 to stop the interval.
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../media/vendor/angular-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../media/vendor/angular-animate-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../media/vendor/angular-sanitize-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../media/vendor/ui-bootstrap-tpls-2.2.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../tpls/3/files/carousel.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

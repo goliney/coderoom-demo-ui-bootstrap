@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../../../media/vendor/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../media/coderoom-helpers/coderoom.css">
+    <link rel="stylesheet" href="../../../tpls/5/2/files/datepicker_popup.css">
+</head>
+<body>
+
+
+<div class="cr-wrap" ng-app="ui.bootstrap.demo">
+    <div class="cr-content" ng-controller="DatepickerPopupDemoCtrl">
+        <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+
+        <h4>Popup</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           uib-datepicker-popup="{{format}}"
+                           ng-model="dt"
+                           is-open="popup1.opened"
+                           datepicker-options="dateOptions"
+                           ng-required="true"
+                           close-text="Close"
+                           alt-input-formats="altInputFormats" />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <p class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           uib-datepicker-popup
+                           ng-model="dt"
+                           is-open="popup2.opened"
+                           datepicker-options="dateOptions"
+                           ng-required="true"
+                           close-text="Close" />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>
+                    Format:
+                    <span class="muted-text">
+                        (manual alternate <em>{{altInputFormats[0]}}</em>)
+                    </span>
+                </label>
+                <select class="form-control" ng-model="format" ng-options="f for f in formats">
+                    <option></option>
+                </select>
+            </div>
+        </div>
+
+        <hr />
+        <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
+        <button type="button" class="btn btn-sm btn-default" ng-click="setDate(2009, 7, 24)">2009-08-24</button>
+        <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
+        <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" uib-tooltip="After today restriction">Min date</button>
+    </div>
+</div>
+
+
+<script src="../../../media/vendor/angular-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/angular-animate-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/angular-sanitize-1.5.8.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../media/vendor/ui-bootstrap-tpls-2.2.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../tpls/5/2/files/datepicker_popup.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
