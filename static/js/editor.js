@@ -1,3 +1,5 @@
+'use strict';
+
 /* global editor:true */
 (function () {
     'use strict';
@@ -34,7 +36,7 @@
         $editorEl.removeClass('invisible');
     }
 
-    $('.show-snippet a').bind('click', function(e) {
+    $('.show-snippet a').bind('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
         show($(this).data('path'));
@@ -43,7 +45,7 @@
     });
 
     function show(path) {
-        var $snippetEl = $('.snippet[data-path="' + path +'"]');
+        var $snippetEl = $('.snippet[data-path="' + path + '"]');
         var mode = $snippetEl.data('mode');
         var content = $snippetEl.text();
         editor.setValue(content, -1);
