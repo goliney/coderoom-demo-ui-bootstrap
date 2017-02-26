@@ -1,3 +1,5 @@
+'use strict';
+
 var editor;
 
 (function () {
@@ -15,7 +17,7 @@ var editor;
     function markActiveMenu() {
         var links = $menuEl.find('.link');
         for (var i = 0; i < links.length; i++) {
-            var href = (links[i].getAttribute('href')).replace(/\.\.\//g, '');
+            var href = links[i].getAttribute('href').replace(/\.\.\//g, '');
             if (document.URL.indexOf(href) !== -1) {
                 links[i].classList.add('active');
             }
@@ -33,7 +35,7 @@ var editor;
 
             $backdrop.removeClass('hidden');
             $backdrop.bind({
-                mousemove: function (e) {
+                mousemove: function mousemove(e) {
                     var delta = initialX - e.pageX;
                     if (editorWidth - delta > minWidth && iframeWidth + delta > minWidth) {
                         var percentage = (iframeWidth + delta) * 100 / contentWidth;
@@ -41,7 +43,7 @@ var editor;
                         editor.resize();
                     }
                 },
-                mouseup: function () {
+                mouseup: function mouseup() {
                     $backdrop.off('mousemove mouseup');
                     $backdrop.addClass('hidden');
                 }
