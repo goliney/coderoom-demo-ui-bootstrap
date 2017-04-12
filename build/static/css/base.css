@@ -155,7 +155,6 @@ html, body {
       color: rgba(255, 255, 255, 0.5);
       z-index: -1; }
     #sidebar #menu .search .fa-remove {
-      display: none;
       position: absolute;
       right: 0;
       padding: 0 15px 0 10px;
@@ -164,11 +163,8 @@ html, body {
       cursor: pointer; }
       #sidebar #menu .search .fa-remove:hover, #sidebar #menu .search .fa-remove:focus {
         color: #6ce0e0; }
-    #sidebar #menu .search.has-query .fa-remove {
-      display: inline-block; }
     #sidebar #menu .search:hover .fa-search,
-    #sidebar #menu .search.has-query .fa-search,
-    #sidebar #menu .search.focus .fa-search {
+    #sidebar #menu .search.active .fa-search {
       color: rgba(255, 255, 255, 0.9); }
     #sidebar #menu .search input {
       flex: 1;
@@ -209,13 +205,12 @@ html, body {
     border-top: 1px solid rgba(255, 255, 255, 0.08); }
   #sidebar #menu .filtered-out {
     display: none; }
-  #sidebar [no-items-label] {
-    display: none;
+  #sidebar .no-items-label {
     padding: 15px;
     padding-top: 30px;
     font-style: italic; }
-  #sidebar.no-search-results [no-items-label] {
-    display: block; }
+  #sidebar:not(.mounted) .no-items-label {
+    display: none; }
 
 #editor {
   position: relative; }

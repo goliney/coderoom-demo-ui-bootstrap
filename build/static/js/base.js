@@ -5,33 +5,22 @@ var editor;
 (function () {
     'use strict';
 
-    var $menuEl = $('#menu');
     var $contentEl = $('#content');
     var $editorEl = $('#editor');
     var $iframeEl = $('#iframe');
     var $backdrop = $('#backdrop');
 
-    markActiveMenu();
     activateResizable();
-
-    function markActiveMenu() {
-        var links = $menuEl.find('.link');
-        for (var i = 0; i < links.length; i++) {
-            var href = links[i].getAttribute('href').replace(/\.\.\//g, '');
-            if (document.URL.indexOf(href) !== -1) {
-                links[i].classList.add('active');
-            }
-        }
-    }
 
     function activateResizable() {
         var minWidth = 200;
         var $handle = $('#resize-handle');
+
         $handle.bind('mousedown', function (e) {
-            var initialX;
-            var contentWidth;
-            var iframeWidth;
-            var editorWidth;
+            var initialX = e.pageX;
+            var contentWidth = $contentEl.outerWidth();
+            var iframeWidth = $iframeEl.outerWidth();
+            var editorWidth = $editorEl.outerWidth();
 
             $backdrop.removeClass('hidden');
             $backdrop.bind({
@@ -48,11 +37,6 @@ var editor;
                     $backdrop.addClass('hidden');
                 }
             });
-
-            initialX = e.pageX;
-            contentWidth = $contentEl.outerWidth();
-            iframeWidth = $iframeEl.outerWidth();
-            editorWidth = $editorEl.outerWidth();
         });
     }
 })();
