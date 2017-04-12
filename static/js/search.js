@@ -1,132 +1,98 @@
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 (function () {
     'use strict';
 
-    var FILTERED_OUT_CLASS = 'filtered-out';
-    var FILTERED_IN_CLASS = 'filtered-in';
-    var DIR_FILTERED_IN_CLASS = 'dir-filtered-in';
-    var HAS_QUERY_CLASS = 'has-query';
-    var NO_ITEMS_AVAILABLE_CLASS = 'no-search-results';
-    var SEARCH_DATA_KEY = 'SEARCH_DATA_KEY';
+    updateRooms(ROOT);
+    function updateRooms(room) {
+        var depth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
-    var $sidebar = $('#sidebar');
-    var $searchWrap = $sidebar.find('.search');
-    var $input = $searchWrap.find('input');
-    var $clear = $searchWrap.find('[clear]');
-
-    var $items = $sidebar.find('li:not(.search)');
-
-    activate();
-
-    function activate() {
-        $input.focus();
-        bindEvents();
-        prepareTreeData();
+        room.items.forEach(function (item, index) {
+            item.index = index;
+            updateRooms(item, depth + 1);
+        });
     }
 
-    function bindEvents() {
-        $input.on('focus', function () {
-            $searchWrap.addClass('focus');
-        });
-
-        $input.on('blur', function () {
-            $searchWrap.removeClass('focus');
-        });
-
-        $input.on('keydown', function (e) {
-            if (e.keyCode == 27) {
-                // ESC
-                $input.val('');
-                $input.change();
+    // menu item
+    Vue.component('menu-item', {
+        delimiters: ['${', '}'],
+        props: ['room', 'pathToParent'],
+        template: '#menu-item-tpl',
+        methods: {
+            getRoomUrl: function getRoomUrl() {
+                var pathToRoot = Array(DEPTH).join('../');
+                return './' + pathToRoot + 'tpls/' + this.pathToRoom + 'index.html';
             }
-        });
-
-        $input.on('propertychange change click keyup input paste', function () {
-            var value = $input.val().trim();
-            if ($input.data('oldVal') != value) {
-                $input.data('oldVal', value);
-
-                if (value.length > 0) {
-                    $searchWrap.addClass(HAS_QUERY_CLASS);
-                    filter(value);
-                } else {
-                    $searchWrap.removeClass(HAS_QUERY_CLASS);
-                    clearFilter();
-                }
-                checkItemsAvailability();
+        },
+        computed: {
+            pathToRoom: function pathToRoom() {
+                return '' + (this.pathToParent || '') + this.room.index + '/';
+            },
+            isActive: function isActive() {
+                // TODO: must be better way of doing this
+                var href = this.getRoomUrl().replace(/.+?(?=\/tpls)/, '');
+                return document.URL.indexOf(href) !== -1;
             }
-        });
-
-        $clear.on('click', function () {
-            $input.val('');
-            $input.change();
-            $input.focus();
-        });
-    }
-
-    function prepareTreeData() {
-        $items.each(function () {
-            var $item = $(this);
-            var $childDir = $item.children('.dir-name');
-            var $children = $item.find('.link, .dir-name');
-            var $arrayOfNames = $children.map(function () {
-                return $(this).text().toLowerCase();
-            });
-            var isDir = $childDir.length > 0;
-
-            $item.data(SEARCH_DATA_KEY, {
-                isDir: isDir,
-                dirName: isDir ? $childDir.text().toLowerCase() : '',
-                allNames: $arrayOfNames.get()
-            });
-        });
-    }
-
-    function filter(query) {
-        query = query.toLowerCase();
-        $items.each(function () {
-            var $item = $(this);
-            var childrenNames = $item.data(SEARCH_DATA_KEY).allNames;
-            var isDir = $item.data(SEARCH_DATA_KEY).isDir;
-            var dirName = $item.data(SEARCH_DATA_KEY).dirName;
-
-            var hasMatchedChild = childrenNames.some(function (name) {
-                return name.indexOf(query) !== -1;
-            });
-
-            var isDirMatch = isDir && dirName.indexOf(query) !== -1;
-            var hasParentDirMatch = $item.parents('.' + DIR_FILTERED_IN_CLASS).length > 0;
-
-            // if dir name matches search - set class to dir
-            if (isDirMatch) {
-                $item.addClass(DIR_FILTERED_IN_CLASS);
-            } else {
-                $item.removeClass(DIR_FILTERED_IN_CLASS);
-            }
-
-            if (hasMatchedChild || hasParentDirMatch) {
-                $item.addClass(FILTERED_IN_CLASS);
-                $item.removeClass(FILTERED_OUT_CLASS);
-            } else {
-                $item.addClass(FILTERED_OUT_CLASS);
-                $item.removeClass(FILTERED_IN_CLASS);
-            }
-        });
-    }
-
-    function clearFilter() {
-        $items.removeClass(FILTERED_IN_CLASS);
-        $items.removeClass(FILTERED_OUT_CLASS);
-    }
-
-    function checkItemsAvailability() {
-        var hasAvailableItems = $items.filter('.' + FILTERED_IN_CLASS).length > 0;
-        var hasQuery = $input.val().length > 0;
-        if (hasAvailableItems || !hasQuery) {
-            $sidebar.removeClass(NO_ITEMS_AVAILABLE_CLASS);
-        } else {
-            $sidebar.addClass(NO_ITEMS_AVAILABLE_CLASS);
         }
-    }
+    });
+
+    // Sidebar
+    new Vue({
+        delimiters: ['${', '}'],
+        el: '#sidebar',
+        data: {
+            root: ROOT,
+            search: '',
+            mounted: false,
+            isSearchFocused: false
+        },
+        mounted: function mounted() {
+            this.mounted = true;
+            this.focusSearch();
+        },
+
+        computed: {
+            /**
+             * Return rooms which title or children title contains search query.
+             * Nesting is preserved
+             *
+             * @returns {Array} - root items which satisfy query
+             */
+            filteredItems: function filteredItems() {
+                var query = this.search.toLowerCase().trim();
+                var filteredRoot = _traverse(_extends({}, this.root, { title: '' }));
+                return filteredRoot ? filteredRoot.items : [];
+
+                function _traverse(room) {
+                    // return whole room with items if title matches
+                    if (room.title.toLowerCase().indexOf(query) > -1) {
+                        return room;
+                    }
+                    // find items that match
+                    var items = room.items.reduce(function (acc, item) {
+                        var traversedItem = _traverse(item);
+                        if (traversedItem) {
+                            acc.push(traversedItem);
+                        }
+                        return acc;
+                    }, []);
+                    // return room with only those items, that match
+                    if (items.length > 0) {
+                        return _extends({}, room, { items: items });
+                    }
+                }
+            }
+        },
+        methods: {
+            clearSearch: function clearSearch() {
+                this.search = '';
+                this.focusSearch();
+            },
+            focusSearch: function focusSearch() {
+                this.$refs.search.focus();
+            }
+        }
+    });
 })();
